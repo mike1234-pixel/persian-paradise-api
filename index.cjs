@@ -12,6 +12,8 @@ app.options("*", cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+const port = process.env.PORT || 4000
+
 const DB = (process.env.MONGO_URI ?? "")
   .replace("<user>", process.env.MONGO_USER ?? "")
   .replace("<password>", process.env.MONGO_PASSWORD ?? "")
@@ -66,6 +68,6 @@ app.get("/api/modules", (req, res) => {
   })
 })
 
-app.listen(4000, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log("Server listening on port 4000")
 })
