@@ -14,8 +14,7 @@
     "mongoose": "^6.1.1"
   },
   "scripts": {
-    "start": "node index.cjs",
-    "build": "tsc"
+    "start": "node index.cjs"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
