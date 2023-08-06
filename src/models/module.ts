@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 
-const moduleSchema = new mongoose.Schema({
+export const moduleSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -28,4 +28,4 @@ const moduleSchema = new mongoose.Schema({
   ],
 })
 
-module.exports = mongoose.model("Module", moduleSchema)
+export const ModuleModel = mongoose.model("Module", moduleSchema)

@@ -1,19 +1,22 @@
-const express = require("express")
-const cors = require("cors")
-const bodyParser = require("body-parser")
-const mongoose = require("mongoose")
-const helmet = require("helmet")
-const dotenv = require("dotenv").config()
-const moduleApi = require("./routes/moduleApi.cjs")
+import express from "express"
+import cors from "cors"
+import bodyParser from "body-parser"
+import mongoose from "mongoose"
+import helmet from "helmet"
+import dotenv from "dotenv"
+import moduleApi from "./routes/moduleApi.js" // must use paths that work at runtime
+
+dotenv.config()
 
 const app = express()
+
 app.use(helmet())
 app.use(cors())
 app.options("*", cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-const port = process.env.PORT || 4000
+const port = Number(process.env.PORT) || 4000
 
 const DB = (process.env.MONGO_URI ?? "")
   .replace("<user>", process.env.MONGO_USER ?? "")
