@@ -12,7 +12,8 @@
     "graphql": "^15.4.0",
     "graphql-http": "^1.21.0",
     "helmet": "^7.0.0",
-    "mongoose": "^6.1.1"
+    "mongoose": "^6.1.1",
+    "persian-paradise-shared-types": "^1.0.0"
   },
   "scripts": {
     "start": "node dist/index.js"

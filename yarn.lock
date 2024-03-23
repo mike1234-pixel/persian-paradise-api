@@ -1378,6 +1378,11 @@ path-to-regexp@0.1.7:
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
   integrity sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==
 
+persian-paradise-shared-types@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/persian-paradise-shared-types/-/persian-paradise-shared-types-1.0.0.tgz#d7fa2fd47707d198e3dbc4fdab19d739c1c6546e"
+  integrity sha512-AM5NLk6eg1TPSOS7VdpPYPNpg3lJnu9TY8nltQW7Ru+qAxjZdOKpYPAS9aAUpJsSj9CsL5X1kpgbtKcSSopOug==
+
 proxy-addr@~2.0.7:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.7.tgz#f19fe69ceab311eeb94b42e70e8c2070f9ba1025"

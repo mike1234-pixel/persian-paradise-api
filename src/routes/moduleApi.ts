@@ -1,6 +1,6 @@
 import { Express, Request, Response } from "express"
 import { ModuleModel } from "../models/module.js"
-import { ModulesList } from "../types/Module"
+import { ModulesList } from "persian-paradise-shared-types"
 
 const moduleApi = (app: Express) => {
   app.get("/api/modules", (req: Request, res: Response) => {
