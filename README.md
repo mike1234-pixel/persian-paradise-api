@@ -22,4 +22,4 @@ The API interacts with a MongoDB database
 
 ## Shared Types
 
-Shared types are stored in [Persian Paradise App](https://www.npmjs.com/package/persian-paradise-shared-types).
+Shared types are stored in [persian-paradise-shared-types npm package](https://www.npmjs.com/package/persian-paradise-shared-types).
