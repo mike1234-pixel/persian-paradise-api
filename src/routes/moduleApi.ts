@@ -59,6 +59,34 @@ const moduleApi = (app: Express) => {
     }
   })
 
+  app.put("/api/module/update", async (req: Request, res: Response) => {
+    const { title, subtitle, emoji, phrases }: CourseModule = req.body
+
+    if (!title || !phrases || !Array.isArray(phrases)) {
+      res.status(400).json({ error: "Invalid request body" })
+      return
+    }
+
+    try {
+      const module = await ModuleModel.findOne({ title })
+
+      if (!module) {
+        res.status(404).json({ error: "Module not found" })
+        return
+      }
+
+      module.subtitle = subtitle
+      module.emoji = emoji
+
+      await module.save()
+
+      res.status(200).json({ message: "Module updated successfully", module })
+    } catch (err) {
+      console.error("Error updating module:", err)
+      res.status(500).json({ error: "Failed to update module" })
+    }
+  })
+
   app.put("/api/module/phrase/update", async (req: Request, res: Response) => {
     const { moduleName, newPhrase }: { moduleName: string; newPhrase: Phrase } =
       req.body

@@ -55,6 +55,28 @@ const moduleApi = (app) => {
             res.status(500).json({ error: "Failed to add phrase to module" });
         }
     }));
+    app.put("/api/module/update", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const { title, subtitle, emoji, phrases } = req.body;
+        if (!title || !phrases || !Array.isArray(phrases)) {
+            res.status(400).json({ error: "Invalid request body" });
+            return;
+        }
+        try {
+            const module = yield ModuleModel.findOne({ title });
+            if (!module) {
+                res.status(404).json({ error: "Module not found" });
+                return;
+            }
+            module.subtitle = subtitle;
+            module.emoji = emoji;
+            yield module.save();
+            res.status(200).json({ message: "Module updated successfully", module });
+        }
+        catch (err) {
+            console.error("Error updating module:", err);
+            res.status(500).json({ error: "Failed to update module" });
+        }
+    }));
     app.put("/api/module/phrase/update", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { moduleName, newPhrase } = req.body;
         console.log(moduleName, newPhrase);
