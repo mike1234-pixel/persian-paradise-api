@@ -39,6 +39,7 @@ const moduleApi = (app) => {
     }));
     app.put("/api/module/phrase/update", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { moduleName, newPhrase } = req.body;
+        console.log(moduleName, newPhrase);
         try {
             const module = yield ModuleModel.findOne({ title: moduleName });
             if (!module) {
@@ -54,6 +55,7 @@ const moduleApi = (app) => {
             module.phrases[existingPhraseIndex].fa = newPhrase.fa;
             module.phrases[existingPhraseIndex].emoji = newPhrase.emoji;
             module.phrases[existingPhraseIndex].hint = newPhrase.hint;
+            module.markModified("phrases");
             yield module.save();
             res.status(200).json({ message: "Phrase updated successfully", module });
         }

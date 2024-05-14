@@ -39,6 +39,8 @@ const moduleApi = (app: Express) => {
     const { moduleName, newPhrase }: { moduleName: string; newPhrase: Phrase } =
       req.body
 
+    console.log(moduleName, newPhrase)
+
     try {
       const module = await ModuleModel.findOne({ title: moduleName })
 
@@ -61,6 +63,7 @@ const moduleApi = (app: Express) => {
       module.phrases[existingPhraseIndex].emoji = newPhrase.emoji
       module.phrases[existingPhraseIndex].hint = newPhrase.hint
 
+      module.markModified("phrases")
       await module.save()
 
       res.status(200).json({ message: "Phrase updated successfully", module })
