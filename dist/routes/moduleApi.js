@@ -20,7 +20,7 @@ const moduleApi = (app) => {
             }
         });
     });
-    app.post("/api/modules/addPhrase", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    app.post("/api/module/phrase/add", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { title, phrase } = req.body;
         try {
             const module = yield ModuleModel.findOne({ title });
@@ -37,7 +37,7 @@ const moduleApi = (app) => {
             res.status(500).json({ error: "Failed to add phrase to module" });
         }
     }));
-    app.put("/api/modules/updatePhrase", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    app.put("/api/module/phrase/update", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { moduleName, newPhrase } = req.body;
         try {
             const module = yield ModuleModel.findOne({ title: moduleName });
@@ -62,7 +62,7 @@ const moduleApi = (app) => {
             res.status(500).json({ error: "Failed to update phrase" });
         }
     }));
-    app.delete("/api/modules/deletePhrase", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    app.delete("/api/module/phrase/delete", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { moduleName, phraseName, } = req.body;
         try {
             const module = yield ModuleModel.findOne({ title: moduleName });

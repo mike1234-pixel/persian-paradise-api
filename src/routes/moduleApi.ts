@@ -14,7 +14,7 @@ const moduleApi = (app: Express) => {
     })
   })
 
-  app.post("/api/modules/addPhrase", async (req: Request, res: Response) => {
+  app.post("/api/module/phrase/add", async (req: Request, res: Response) => {
     const { title, phrase }: { title: string; phrase: Phrase } = req.body
 
     try {
@@ -35,7 +35,7 @@ const moduleApi = (app: Express) => {
     }
   })
 
-  app.put("/api/modules/updatePhrase", async (req: Request, res: Response) => {
+  app.put("/api/module/phrase/update", async (req: Request, res: Response) => {
     const { moduleName, newPhrase }: { moduleName: string; newPhrase: Phrase } =
       req.body
 
@@ -71,7 +71,7 @@ const moduleApi = (app: Express) => {
   })
 
   app.delete(
-    "/api/modules/deletePhrase",
+    "/api/module/phrase/delete",
     async (req: Request, res: Response) => {
       const {
         moduleName,
