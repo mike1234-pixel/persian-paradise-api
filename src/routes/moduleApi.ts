@@ -38,6 +38,29 @@ const moduleApi = (app: Express) => {
     }
   })
 
+  app.delete("/api/module/delete", async (req: Request, res: Response) => {
+    const { title }: { title: string } = req.body
+
+    if (!title) {
+      res.status(400).json({ error: "Title is required" })
+      return
+    }
+
+    try {
+      const module = await ModuleModel.findOneAndDelete({ title })
+
+      if (!module) {
+        res.status(404).json({ error: "Module not found" })
+        return
+      }
+
+      res.status(200).json({ message: "Module deleted successfully" })
+    } catch (err) {
+      console.error("Error deleting module:", err)
+      res.status(500).json({ error: "Failed to delete module" })
+    }
+  })
+
   app.post("/api/module/phrase/add", async (req: Request, res: Response) => {
     const { title, phrase }: { title: string; phrase: Phrase } = req.body
 

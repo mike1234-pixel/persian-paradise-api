@@ -38,6 +38,25 @@ const moduleApi = (app) => {
             res.status(500).json({ error: "Failed to create module" });
         }
     }));
+    app.delete("/api/module/delete", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const { title } = req.body;
+        if (!title) {
+            res.status(400).json({ error: "Title is required" });
+            return;
+        }
+        try {
+            const module = yield ModuleModel.findOneAndDelete({ title });
+            if (!module) {
+                res.status(404).json({ error: "Module not found" });
+                return;
+            }
+            res.status(200).json({ message: "Module deleted successfully" });
+        }
+        catch (err) {
+            console.error("Error deleting module:", err);
+            res.status(500).json({ error: "Failed to delete module" });
+        }
+    }));
     app.post("/api/module/phrase/add", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { title, phrase } = req.body;
         try {
