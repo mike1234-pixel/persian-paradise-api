@@ -69,6 +69,42 @@ const moduleApi = (app: Express) => {
       res.status(500).json({ error: "Failed to update phrase" })
     }
   })
+
+  app.delete(
+    "/api/modules/deletePhrase",
+    async (req: Request, res: Response) => {
+      const {
+        moduleName,
+        phraseName,
+      }: { moduleName: string; phraseName: string } = req.body
+
+      try {
+        const module = await ModuleModel.findOne({ title: moduleName })
+
+        if (!module) {
+          res.status(404).json({ error: "Module not found" })
+          return
+        }
+
+        const originalLength = module.phrases.length
+        module.phrases = module.phrases.filter(
+          (phrase) => phrase.en !== phraseName
+        )
+
+        if (module.phrases.length === originalLength) {
+          res.status(404).json({ error: "Phrase not found in the module" })
+          return
+        }
+
+        await module.save()
+
+        res.status(200).json({ message: "Phrase deleted successfully", module })
+      } catch (err) {
+        console.error("Error deleting phrase:", err)
+        res.status(500).json({ error: "Failed to delete phrase" })
+      }
+    }
+  )
 }
 
 export default moduleApi

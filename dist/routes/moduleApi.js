@@ -62,5 +62,27 @@ const moduleApi = (app) => {
             res.status(500).json({ error: "Failed to update phrase" });
         }
     }));
+    app.delete("/api/modules/deletePhrase", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const { moduleName, phraseName, } = req.body;
+        try {
+            const module = yield ModuleModel.findOne({ title: moduleName });
+            if (!module) {
+                res.status(404).json({ error: "Module not found" });
+                return;
+            }
+            const originalLength = module.phrases.length;
+            module.phrases = module.phrases.filter((phrase) => phrase.en !== phraseName);
+            if (module.phrases.length === originalLength) {
+                res.status(404).json({ error: "Phrase not found in the module" });
+                return;
+            }
+            yield module.save();
+            res.status(200).json({ message: "Phrase deleted successfully", module });
+        }
+        catch (err) {
+            console.error("Error deleting phrase:", err);
+            res.status(500).json({ error: "Failed to delete phrase" });
+        }
+    }));
 };
 export default moduleApi;
