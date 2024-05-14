@@ -1,6 +1,10 @@
 import { Express, Request, Response } from "express"
 import { ModuleModel } from "../models/module.js"
-import { ModulesList, Phrase } from "persian-paradise-shared-types"
+import {
+  CourseModule,
+  ModulesList,
+  Phrase,
+} from "persian-paradise-shared-types"
 
 const moduleApi = (app: Express) => {
   app.get("/api/modules", (req: Request, res: Response) => {
@@ -12,6 +16,26 @@ const moduleApi = (app: Express) => {
         res.json(modules)
       }
     })
+  })
+
+  app.post("/api/module/add", async (req: Request, res: Response) => {
+    const { title, subtitle, emoji, phrases }: CourseModule = req.body
+
+    if (!title || !phrases || !Array.isArray(phrases)) {
+      res.status(400).json({ error: "Invalid request body" })
+      return
+    }
+
+    try {
+      const newModule = new ModuleModel({ title, subtitle, emoji, phrases })
+      await newModule.save()
+      res
+        .status(201)
+        .json({ message: "Module created successfully", module: newModule })
+    } catch (err) {
+      console.error("Error creating module:", err)
+      res.status(500).json({ error: "Failed to create module" })
+    }
   })
 
   app.post("/api/module/phrase/add", async (req: Request, res: Response) => {

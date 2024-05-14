@@ -20,6 +20,24 @@ const moduleApi = (app) => {
             }
         });
     });
+    app.post("/api/module/add", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const { title, subtitle, emoji, phrases } = req.body;
+        if (!title || !phrases || !Array.isArray(phrases)) {
+            res.status(400).json({ error: "Invalid request body" });
+            return;
+        }
+        try {
+            const newModule = new ModuleModel({ title, subtitle, emoji, phrases });
+            yield newModule.save();
+            res
+                .status(201)
+                .json({ message: "Module created successfully", module: newModule });
+        }
+        catch (err) {
+            console.error("Error creating module:", err);
+            res.status(500).json({ error: "Failed to create module" });
+        }
+    }));
     app.post("/api/module/phrase/add", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { title, phrase } = req.body;
         try {
